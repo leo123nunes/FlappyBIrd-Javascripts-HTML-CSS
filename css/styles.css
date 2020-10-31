@@ -22,5 +22,15 @@ body{
     height: 300px;
     margin: auto;
     margin-top: 30px;
-    border: solid 4px rgb(0, 45, 129);
+    border: solid 8px rgb(3, 73, 204);
+}
+
+.birdImage{
+    position: absolute;
+    display: flex;
+    margin: auto;
+    top: 180px;
+    left: 400px;
+    width: 30px;
+    height: 30px;
 }

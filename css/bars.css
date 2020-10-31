@@ -1,0 +1,30 @@
+.bars{
+    display: flex;
+    flex-direction: column;
+    width: 80px;
+    height: 100%;
+    margin-left: 150px;
+}
+
+.barContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.barTop{
+    width: 100%;
+    height: 20%;
+    border: solid 2px rgb(0, 0, 0);
+    background-color: rgb(59, 200, 83);
+    border-top: none;
+}
+
+.barBottom{
+    width: 100%;
+    height: 50%;
+    border: solid 2px rgb(0, 0, 0);
+    background-color: rgb(59, 200, 83);
+    border-bottom: none;
+}
