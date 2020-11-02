@@ -1,5 +1,7 @@
 body{
     background-color: rgb(31, 55, 109);
+    margin: 0px;
+    margin-top: 10px;
 }
 
 .gameTitle{

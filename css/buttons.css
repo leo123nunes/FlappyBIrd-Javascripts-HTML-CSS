@@ -1,0 +1,39 @@
+.buttonStart{
+    font-family: 'Itim', cursive;
+    position: relative;
+    width: 40%;
+    height: 100%;
+    width: max-content;
+    padding: 5px 10px;
+    background-color: rgb(117, 216, 246);
+    border: solid 2px rgb(88, 179, 207);
+    color: rgb(0, 82, 4);
+    box-shadow: 3px 3px 3px rgb(0, 102, 17);
+}
+
+.buttonPause{
+    font-family: 'Itim', cursive;
+    position: relative;
+    width: max-content;
+    height: 100%;
+    padding: 5px 10px;
+    background-color: rgb(117, 216, 246);
+    border: solid 2px rgb(88, 179, 207);
+    color: rgb(0, 82, 4);
+    box-shadow: 3px 3px 3px rgb(0, 102, 17);
+}
+
+.buttonPause:active, .buttonStart:active{
+    background-color: rgb(72, 134, 153);
+    box-shadow: none;
+}
+
+.buttons{
+    flex-direction: row;
+    position: absolute;
+    height: max-content;
+    width: max-content;
+    top: 80px;
+    left: 440px;
+    justify-content: space-between;
+}

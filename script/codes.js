@@ -9,16 +9,16 @@ var createNewBar = function (gameArea, marginLeft) {
     var newBarTop = document.createElement('div')
     newBarTop.classList.add('barTop')
 
-    var heightTop = Math.random()*200 + 'px'
+    var heightTop = Math.random() * 200 + 'px'
 
     newBarTop.style.height = heightTop
 
     var newBarBottom = document.createElement('div')
     newBarBottom.classList.add('barBottom')
 
-    var heightBottom = 300 - heightTop.replace('px','') - 100  
+    var heightBottom = 300 - heightTop.replace('px', '') - 100
 
-    heightBottom > 0 ? newBarBottom.style.height = heightBottom + 'px' : newBarBottom.style.height = '1px' 
+    heightBottom > 0 ? newBarBottom.style.height = heightBottom + 'px' : newBarBottom.style.height = '1px'
 
     newBarContent.appendChild(newBarTop)
     newBarContent.appendChild(newBarBottom)
@@ -33,17 +33,9 @@ var createNewBar = function (gameArea, marginLeft) {
     gameArea.appendChild(newBar)
 }
 
-//creating 2 bars in begin of the game
+// function to get first bar position
 
-createNewBar(document.querySelector('.gameArea'))
-createNewBar(document.querySelector('.gameArea'))
-
-// loop of the game
-
-var value = 150
-
-setInterval(() => {
-
+var timeCreateNewBar = function () {
     var area = document.querySelector('.gameArea')
     var bars = document.querySelectorAll('.bars')
 
@@ -60,4 +52,32 @@ setInterval(() => {
         value = 150
     }
 
-}, 10)
+}
+
+//creating 2 bars in begin of the game
+
+createNewBar(document.querySelector('.gameArea'))
+createNewBar(document.querySelector('.gameArea'))
+
+// loop of the game
+
+var buttonStart = document.querySelector('.buttonStart')
+var buttonPause = document.querySelector('.buttonPause')
+
+var value = 150
+
+var start = function () {
+    setInterval(timeCreateNewBar, 10)
+}
+
+var stop = function () {
+    clearInterval(start)
+}
+
+buttonStart.addEventListener('click', event => {
+    start()
+})
+
+buttonPause.addEventListener('click', event => {
+    stop()
+})
