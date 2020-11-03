@@ -66,16 +66,23 @@ var buttonPause = document.querySelector('.buttonPause')
 
 var value = 150
 
+var startGame
+var gameIsRunning = false
+
 var start = function () {
-    setInterval(timeCreateNewBar, 10)
+    startGame = setInterval(timeCreateNewBar, 10)
+    gameIsRunning = true
 }
 
 var stop = function () {
-    clearInterval(start)
+    clearInterval(startGame)
+    gameIsRunning = false
 }
 
 buttonStart.addEventListener('click', event => {
-    start()
+    if(gameIsRunning==false){
+        start()
+    } 
 })
 
 buttonPause.addEventListener('click', event => {
