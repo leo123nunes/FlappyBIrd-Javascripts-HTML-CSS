@@ -37,3 +37,13 @@ body{
     width: 30px;
     height: 30px;
 }
+
+.scoreArea{
+    font-family: 'Amatic SC', cursive;
+    font-size: 24px;
+    display: flex;
+    position: absolute;
+    height: max-content;
+    right: 450px;
+    top: 84px;
+}

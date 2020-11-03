@@ -35,7 +35,11 @@ var createNewBar = function (gameArea, marginLeft) {
 
 // function to get first bar position
 
-var timeCreateNewBar = function () {
+var score = document.querySelector('.score')
+var initialScore = 0
+score.innerHTML = `&nbsp${initialScore}`
+
+var gameLooping = function () {
     var area = document.querySelector('.gameArea')
     var bars = document.querySelectorAll('.bars')
 
@@ -50,6 +54,8 @@ var timeCreateNewBar = function () {
     if (bars[0].style.marginLeft == '-80px') {
         bars[0].remove()
         value = 150
+        initialScore++
+        score.innerHTML = `&nbsp${initialScore}`
     }
 
 }
@@ -63,6 +69,7 @@ createNewBar(document.querySelector('.gameArea'))
 
 var buttonStart = document.querySelector('.buttonStart')
 var buttonPause = document.querySelector('.buttonPause')
+var score = document.querySelector('.score')
 
 var value = 150
 
@@ -70,7 +77,7 @@ var startGame
 var gameIsRunning = false
 
 var start = function () {
-    startGame = setInterval(timeCreateNewBar, 10)
+    startGame = setInterval(gameLooping, 10)
     gameIsRunning = true
 }
 
