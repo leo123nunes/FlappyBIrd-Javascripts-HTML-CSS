@@ -38,10 +38,21 @@ var createNewBar = function (gameArea, marginLeft) {
 var score = document.querySelector('.score')
 var initialScore = 0
 score.innerHTML = `&nbsp${initialScore}`
+var bird = document.querySelector('.birdImage')
+var birdMovement = 150
 
 var gameLooping = function () {
     var area = document.querySelector('.gameArea')
     var bars = document.querySelectorAll('.bars')
+    bird.style.marginTop = birdMovement.toFixed(2)+'px'
+    birdMovement += 1
+
+    document.onkeypress = function(e){
+        if(e.key == " "){
+            console.log('key pressed')
+            birdMovement -= 40
+        }
+    }
 
     value -= 1
 
@@ -74,6 +85,7 @@ var score = document.querySelector('.score')
 var value = 150
 
 var startGame
+var playerMovement
 var gameIsRunning = false
 
 var start = function () {
