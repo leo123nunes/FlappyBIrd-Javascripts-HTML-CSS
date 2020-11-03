@@ -45,12 +45,21 @@ var gameLooping = function () {
     var area = document.querySelector('.gameArea')
     var bars = document.querySelectorAll('.bars')
     bird.style.marginTop = birdMovement.toFixed(2)+'px'
-    birdMovement += 1
+
+    if(birdMovement >= 300 - bird.clientHeight){
+        birdMovement = 300 - bird.clientHeight
+    }else{
+        birdMovement += 1
+    }
 
     document.onkeypress = function(e){
         if(e.key == " "){
             console.log('key pressed')
-            birdMovement -= 40
+            if(birdMovement - 40 < 0){
+                birdMovement = 0
+            }else{
+                birdMovement -= 40
+            }
         }
     }
 
