@@ -1,27 +1,45 @@
 
 // function to create a new bar
 
-var createNewBar = function (gameArea, marginLeft) {
+var createNewBar = function (gameArea) {
 
     var newBarContent = document.createElement('div')
     newBarContent.classList.add('barContent')
 
+    var top = document.createElement('div')
+    top.classList.add('top')
+
     var newBarTop = document.createElement('div')
     newBarTop.classList.add('barTop')
 
-    var heightTop = Math.random() * 200 + 'px'
+    var newBarTopTip = document.createElement('div')
+    newBarTopTip.classList.add('barTopTip')
+
+    var heightTop = Math.random() * 150 + 'px'
 
     newBarTop.style.height = heightTop
+
+    top.appendChild(newBarTop)
+    top.appendChild(newBarTopTip)
+
+    var bottom = document.createElement('bottom')
+    bottom.classList.add('bottom')
 
     var newBarBottom = document.createElement('div')
     newBarBottom.classList.add('barBottom')
 
-    var heightBottom = 300 - heightTop.replace('px', '') - 100
+    var newBarBottomTip = document.createElement('div')
+    newBarBottomTip.classList.add('barBottomTip')
+    
+    var heightBottom = 300 - heightTop.replace('px', '') - 160
 
-    heightBottom > 0 ? newBarBottom.style.height = heightBottom + 'px' : newBarBottom.style.height = '1px'
+    heightBottom > 0 ? newBarBottom.style.height = heightBottom + 'px' : newBarBottom.style.height = '0px'
 
-    newBarContent.appendChild(newBarTop)
-    newBarContent.appendChild(newBarBottom)
+    bottom.appendChild(newBarBottomTip)
+    bottom.appendChild(newBarBottom)
+    
+    newBarContent.appendChild(top)
+    newBarContent.appendChild(bottom)
 
     var newBar = document.createElement('div')
     newBar.classList.add('bars')
