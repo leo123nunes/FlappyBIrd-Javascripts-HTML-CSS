@@ -30,14 +30,14 @@ var createNewBar = function (gameArea) {
 
     var newBarBottomTip = document.createElement('div')
     newBarBottomTip.classList.add('barBottomTip')
-    
+
     var heightBottom = 300 - heightTop.replace('px', '') - 160
 
     heightBottom > 0 ? newBarBottom.style.height = heightBottom + 'px' : newBarBottom.style.height = '0px'
 
     bottom.appendChild(newBarBottomTip)
     bottom.appendChild(newBarBottom)
-    
+
     newBarContent.appendChild(top)
     newBarContent.appendChild(bottom)
 
@@ -62,21 +62,22 @@ var birdMovement = 150
 var gameLooping = function () {
     var area = document.querySelector('.gameArea')
     var bars = document.querySelectorAll('.bars')
-    bird.style.marginTop = birdMovement.toFixed(2)+'px'
+    bird.style.marginTop = birdMovement.toFixed(2) + 'px'
 
-    if(birdMovement >= 300 - bird.clientHeight){
-        birdMovement = 300 - bird.clientHeight
-    }else{
+    if (birdMovement >= 300 - bird.clientHeight) {
+        loseGame()
+    } else {
         birdMovement += 1
     }
 
-    document.onkeypress = function(e){
-        if(e.key == " "){
-            console.log('key pressed')
-            if(birdMovement - 40 < 0){
-                birdMovement = 0
-            }else{
-                birdMovement -= 40
+    document.onkeypress = function (e) {
+        if (e.key == " ") {
+            if (gameIsRunning) {
+                if(birdMovement - 40 < 0){
+                    birdMovement = 0
+                }else {
+                    birdMovement -= 40
+                }
             }
         }
     }
@@ -98,6 +99,13 @@ var gameLooping = function () {
 
 }
 
+// function to lose game
+
+var loseGame = function(){
+    stop()
+    game = false
+}
+
 //creating 2 bars in begin of the game
 
 createNewBar(document.querySelector('.gameArea'))
@@ -114,6 +122,7 @@ var value = 150
 var startGame
 var playerMovement
 var gameIsRunning = false
+var game = true
 
 var start = function () {
     startGame = setInterval(gameLooping, 10)
@@ -126,11 +135,13 @@ var stop = function () {
 }
 
 buttonStart.addEventListener('click', event => {
-    if(gameIsRunning==false){
+    if (gameIsRunning == false && game==true ) {
         start()
-    } 
+    }
 })
 
 buttonPause.addEventListener('click', event => {
-    stop()
+    if(game == true && gameIsRunning == true){
+       stop() 
+    } 
 })
