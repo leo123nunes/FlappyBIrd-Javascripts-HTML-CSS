@@ -58,6 +58,7 @@ var initialScore = 0
 score.innerHTML = `&nbsp${initialScore}`
 var bird = document.querySelector('.birdImage')
 var birdMovement = 150
+var rotation = 0.1
 
 var gameLooping = function () {
     var area = document.querySelector('.gameArea')
@@ -67,12 +68,17 @@ var gameLooping = function () {
     if (birdMovement >= 300 - bird.clientHeight) {
         loseGame()
     } else {
-        birdMovement += 1
+        birdMovement += 1 + 0.003*birdMovement
     }
+
+    bird.style.transform = `rotate(${rotation}deg)`
+
+    rotation += 0.2
 
     document.onkeypress = function (e) {
         if (e.key == " ") {
             if (gameIsRunning) {
+                rotation = -5
                 if(birdMovement - 40 < 0){
                     birdMovement = 0
                 }else {
