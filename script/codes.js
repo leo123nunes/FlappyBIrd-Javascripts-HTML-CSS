@@ -87,11 +87,11 @@ var gameLooping = function () {
     bird.style.transform = `rotate(${birdRotation}deg)`
 
     if (touchFloor(bird, area.clientHeight)) {
-        loseGame()
+        loseGame(scoreText.textContent)
     }
 
     if (barCollision(bars, bird)) {
-        loseGame()
+        loseGame(scoreText.textContent)
     }
 
     document.onkeypress = function (e) {
@@ -162,9 +162,21 @@ var barCollision = function (bar, bird) {
 
 // function to lose and finish game
 
-var loseGame = function () {
+var loseGame = function (score) {
     stop()
     game = false
+    var loseGameMsg = document.createElement('div')
+    loseGameMsg.classList.add('loseGame')
+
+    var retryLink = document.createElement('a')
+    retryLink.classList.add('retryLink')
+    retryLink.href = "../flappyBirdGame/index.html"
+    retryLink.innerHTML = "RETRY"
+
+    loseGameMsg.innerHTML = `YOU LOSE <br></br> SCORE = ${score} <br></br>`
+
+    loseGameMsg.append(retryLink)
+    document.querySelector('.gameArea').appendChild(loseGameMsg)
 }
 
 var start = function () {

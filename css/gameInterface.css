@@ -37,3 +37,33 @@ body{
     right: 450px;
     top: 84px;
 }
+
+.loseGame{
+    font-family: 'Amatic SC', cursive;
+    position: absolute;
+    margin: 50px 150px;
+    width: 200px;
+    height: 200px;
+    border: solid 2px rgb(0, 0, 0);
+    background-color: rgb(255, 0, 0);
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    font-size: 40px;
+    text-align: center;
+    line-height: 34px;
+    padding: 10px;
+}
+
+.retryLink{
+    text-decoration: none;
+    background-color: #ff5f5f;
+    color: #fff;
+    padding: 5px 20px;
+    border-radius: 25px 25px 25px;
+    border: solid 2px #fff;
+}
+
+.retryLink:hover{
+    background-color: #fff;
+    color: #ff5f5f;
+}
