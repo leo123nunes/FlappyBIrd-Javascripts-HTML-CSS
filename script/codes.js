@@ -1,5 +1,15 @@
 
-// function to create a new bar
+var buttonStart = document.querySelector('.buttonStart')
+var buttonPause = document.querySelector('.buttonPause')
+var scoreText = document.querySelector('.scoreText')
+
+var startGame;
+var playerMovement;
+var gameIsRunning = false
+var game = true
+var birdRotation = 0.1
+
+// creating new bar
 
 var createNewBar = function (gameArea) {
 
@@ -51,46 +61,53 @@ var createNewBar = function (gameArea) {
     gameArea.appendChild(newBar)
 }
 
-// function to get first bar position
+// creating 2 bars in begin of the game
 
-var score = document.querySelector('.score')
-var initialScore = 0
-score.innerHTML = `&nbsp${initialScore}`
-var bird = document.querySelector('.birdImage')
-var birdMovement = 150
-var rotation = 0.1
+createNewBar(document.querySelector('.gameArea'))
+createNewBar(document.querySelector('.gameArea'))
+
+// starting the game
 
 var gameLooping = function () {
+    var scoreText = document.querySelector('.score')
     var area = document.querySelector('.gameArea')
     var bars = document.querySelectorAll('.bars')
-    bird.style.marginTop = birdMovement.toFixed(2) + 'px'
+    var bird = document.querySelector('.birdImage')
 
-    if (birdMovement >= 300 - bird.clientHeight) {
+    var marginLeftFirstBar = window.getComputedStyle(bars[0]).marginLeft.replace('px', '')
+    var marginTopBird = window.getComputedStyle(bird).marginTop.replace('px', '')
+
+    marginLeftFirstBar--
+    marginTopBird++
+
+    bars[0].style.marginLeft = marginLeftFirstBar + 'px'
+
+    bird.style.marginTop = marginTopBird + 'px'
+
+    bird.style.transform = `rotate(${birdRotation}deg)`
+
+    if (touchFloor(bird, area.clientHeight)) {
         loseGame()
-    } else {
-        birdMovement += 1 + 0.003*birdMovement
     }
 
-    bird.style.transform = `rotate(${rotation}deg)`
-
-    rotation += 0.2
+    if (barCollision(bars, bird)) {
+        loseGame()
+    }
 
     document.onkeypress = function (e) {
         if (e.key == " ") {
             if (gameIsRunning) {
-                rotation = -5
-                if(birdMovement - 40 < 0){
-                    birdMovement = 0
-                }else {
-                    birdMovement -= 40
+                birdRotation = -5
+                if (marginTopBird - 40 < 0) {
+                    marginTopBird = 0
+                    bird.style.marginTop = marginTopBird + 'px'
+                } else {
+                    marginTopBird -= 30
+                    bird.style.marginTop = marginTopBird + 'px'
                 }
             }
         }
     }
-
-    value -= 1
-
-    bars[0].style.marginLeft = value + 'px'
 
     if (bars[0].style.marginLeft == '0px') {
         createNewBar(area)
@@ -98,37 +115,57 @@ var gameLooping = function () {
 
     if (bars[0].style.marginLeft == '-80px') {
         bars[0].remove()
-        value = 150
-        initialScore++
-        score.innerHTML = `&nbsp${initialScore}`
+        marginLeftFirstBar = 150
+        var score = scoreText.textContent.replace(' ', '')
+        score++
+        scoreText.innerHTML = `&nbsp${score}`
     }
 
+    birdRotation += 0.2
 }
 
-// function to lose game
+// functions to lose the game when bird touch the floor and when bird collides the bar
 
-var loseGame = function(){
+var touchFloor = function (bird, gameArea) {
+    var marginTop = bird.style.marginTop.replace("px", "")
+    if (marginTop >= gameArea - bird.clientHeight) {
+        return true
+    }
+}
+
+var barCollision = function (bar, bird) {
+    var marginLeftBar = parseInt(bar[0].style.marginLeft.replace('px', ''))
+
+    var heightTopBar = document.querySelectorAll('.top')[0].clientHeight
+    var heightBottomBar = document.querySelectorAll('.bottom')[0].clientHeight
+
+    var marginTopBird = parseInt(bird.style.marginTop.replace('px', ''))
+    var marginLeftBird = window.getComputedStyle(bird).marginLeft.replace('px', '')
+
+    if (marginLeftBar <= 90 && marginLeftBird <= (marginLeftBar + 60)) {
+        
+        // collide in top bar
+
+        if (marginTopBird <= heightTopBar) {
+        return true
+        }    
+       
+        // collide in bottom bar
+
+        if (marginTopBird + bird.clientHeight >= 300 - parseInt(heightBottomBar)) {
+            return true
+        }
+    }
+
+    return false
+}
+
+// function to lose and finish game
+
+var loseGame = function () {
     stop()
     game = false
 }
-
-//creating 2 bars in begin of the game
-
-createNewBar(document.querySelector('.gameArea'))
-createNewBar(document.querySelector('.gameArea'))
-
-// loop of the game
-
-var buttonStart = document.querySelector('.buttonStart')
-var buttonPause = document.querySelector('.buttonPause')
-var score = document.querySelector('.score')
-
-var value = 150
-
-var startGame
-var playerMovement
-var gameIsRunning = false
-var game = true
 
 var start = function () {
     startGame = setInterval(gameLooping, 10)
@@ -140,14 +177,16 @@ var stop = function () {
     gameIsRunning = false
 }
 
+// events for the start and pause buttons
+
 buttonStart.addEventListener('click', event => {
-    if (gameIsRunning == false && game==true ) {
+    if (gameIsRunning == false && game == true) {
         start()
     }
 })
 
 buttonPause.addEventListener('click', event => {
-    if(game == true && gameIsRunning == true){
-       stop() 
-    } 
+    if (game == true && gameIsRunning == true) {
+        stop()
+    }
 })

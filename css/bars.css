@@ -1,7 +1,6 @@
 .bars{
     display: flex;
     flex-direction: row;
-    width: 80px;
     height: 100%;
     margin-left: 150px;
 }
@@ -15,22 +14,13 @@
     height: 100%;
 }
 
-.barTop{
+.barTop, .barBottom{
     align-self: center;
     width: 60%;
     border: solid 2px rgb(0, 0, 0);
     background: linear-gradient(90deg, rgb(14, 39, 0) 0%, rgba(12,121,9,0.867366929682029) 51%, rgb(142, 255, 157) 100%);
     border-top: none;
     border-bottom: none;
-}
-
-.barBottom{
-    align-self: center;
-    width: 60%;
-    border: solid 2px rgb(0, 0, 0);
-    background: linear-gradient(90deg, rgb(14, 39, 0) 0%, rgba(12,121,9,0.867366929682029) 51%, rgb(142, 255, 157) 100%);
-    border-bottom: none;
-    border-top: none;
 }
 
 .top, .bottom{
