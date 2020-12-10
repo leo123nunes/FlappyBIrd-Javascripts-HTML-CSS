@@ -1,8 +1,8 @@
 # FlappyBIrdGame-Javascripts-HTML-CSS
-Uma réplica do jogo Flappy Bird apenas para motivos de aprendizado.
+Replica of the game Flappy Bird.
 
-# Linguagens de programação
-Javascript, HTML e CSS
+# Programming languages
+Javascript, HTML and CSS
 
 # IDE
 Visual Studio Code 1.49.3
