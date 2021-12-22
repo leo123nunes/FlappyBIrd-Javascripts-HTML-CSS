@@ -1,7 +1,7 @@
 # Flappy Bird Game
 Replica of the game Flappy Bird.
 
-## Languages
+## Code languages
 Javascript, HTML and CSS
 
 ## IDE
